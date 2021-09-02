@@ -9,4 +9,4 @@ def find_max_and_min(file_name: str):
             if int(line) > mx:
                 mx = int(line)
 
-    return [mi, mx]
+    return mi, mx

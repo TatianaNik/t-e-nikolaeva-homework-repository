@@ -14,9 +14,3 @@ def check_sum_of_four(a: List[int], b: List[int], c: List[int], d: List[int]) ->
     return result
 
 
-m = [1, -1, 2, -2]
-e = [0, 1, 2, -2]
-o = [1, -3, 3, -1]
-p = [-1, 0, 1, 1]
-
-print(check_sum_of_four(m, e, o, p))

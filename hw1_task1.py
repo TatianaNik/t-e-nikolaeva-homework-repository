@@ -10,4 +10,3 @@ def check_power_of_2(a: int) -> bool:
     else:
         return False
 
- 

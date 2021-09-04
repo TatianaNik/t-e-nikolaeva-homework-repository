@@ -1,3 +1,0 @@
-file = "Some_file.txt"
-
-print(find_max_and_min(file))

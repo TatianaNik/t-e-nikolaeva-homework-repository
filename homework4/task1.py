@@ -22,12 +22,22 @@ You will learn:
 *** https://docs.python.org/3/tutorial/errors.html#handling-exceptions
 **** https://docs.python.org/3/tutorial/errors.html#raising-exceptions
 """
-
+#import os
 
 def read_magic_number(path: str) -> bool:
-     with open(path) as file:
-         line = file.readline()
-         if float(line) in range[1, 3]:
-             return True
-         else:
-             return False
+    try:
+        with open(path) as file:
+            number = float(file.readline())
+            if 1 <= number < 3:
+                return True
+            else:
+                return False
+    except FileNotFoundError:
+        print('file not found')
+    except:
+        raise ValueError
+
+# if os.path.exists(path) == False:
+#     print(path, 'does not exist')
+
+# print(read_magic_number('file_with_number'))

@@ -30,5 +30,5 @@ def major_and_minor_elem(inp: List) -> Tuple[int, int]:
     return major, minor
 
 
-inp1 = [2, 2, 1, 1, 3, 2, 2]
-print(major_and_minor_elem(inp1))
+# inp1 = [2, 2, 1, 1, 3, 2, 2]
+#print(major_and_minor_elem(inp1))

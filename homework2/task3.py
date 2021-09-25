@@ -13,15 +13,12 @@ assert combinations([1, 2], [3, 4]) == [
 """
 from typing import List, Any
 
-import itertools
-
 
 def combinations(*args: List[Any]) -> List[List]:
-    k = len(args[0])
-    p = list(itertools.combinations((args[i] for i in range(k)), k))
-    print(p)
-    return p
+    result = [[]]
+    for arg in args:
+        result = [x+[y] for x in result for y in arg]
+    return result
 
 
-# WRONG RESULT!
-print(combinations([1, 2, 3], [4, 5, 6], [7, 8, 9]))
+# print(combinations([1, 2, 3], [4, 5, 6], [7, 8, 9]))

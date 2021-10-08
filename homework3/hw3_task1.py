@@ -5,7 +5,7 @@ def cache(times=3):
 
         def wrapper(*args):
             cache_key = tuple(args)
-            if cache_key in cache_dict and times_dict[cache_key] < times:
+            if cache_key in cache_dict and times_dict[cache_key] <= times:
                 times_dict[cache_key] += 1
                 return cache_dict[cache_key]
             else:

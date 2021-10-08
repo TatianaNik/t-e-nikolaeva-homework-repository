@@ -39,27 +39,25 @@ def get_longest_diverse_words(file_path: str, encoding="utf8") -> List[str]:
     return result
 
 
-get_longest_diverse_words("data.txt", encoding="unicode-escape")
+#get_longest_diverse_words("data.txt", encoding="unicode-escape")
 
-            
-#  the code below is running slowly, but the result was "Y"
-#  I made comments so it will not disturb other functions
-#
-# def get_rarest_char(file_path: str) -> str:
-#
-#     with open(file_path) as file:
-#         f = file.read()
-#         num_char = 1000000
-#         for char in f:
-#             num_new_char = f.count(char)
-#             if num_new_char < num_char:
-#                 num_char = num_new_char
-#                 rarest_char = char
-#     print(rarest_char)
-#     return rarest_char
-#
-#
-# get_rarest_char("data.txt")
+
+def get_rarest_char(file_path: str) -> str:
+
+    with open(file_path) as file:
+        f = file.read()
+        f_set = set(f)
+        num_char = 1000000
+        for char in f_set:
+            num_new_char = f.count(char)
+            if num_new_char < num_char:
+                num_char = num_new_char
+                rarest_char = char
+    print(rarest_char)
+    return rarest_char
+
+
+get_rarest_char("data.txt")
 
 
 def count_punctuation_chars(file_path: str, encoding="utf8") -> int:
@@ -74,7 +72,7 @@ def count_punctuation_chars(file_path: str, encoding="utf8") -> int:
     return num
 
 
-count_punctuation_chars("data.txt", encoding="unicode-escape")
+#count_punctuation_chars("data.txt", encoding="unicode-escape")
 
 
 def count_non_ascii_chars(file_path: str, encoding="utf8") -> int:
@@ -88,7 +86,7 @@ def count_non_ascii_chars(file_path: str, encoding="utf8") -> int:
     return counter
 
 
-count_non_ascii_chars("data.txt", encoding="unicode-escape")
+#count_non_ascii_chars("data.txt", encoding="unicode-escape")
 
 
 def get_most_common_non_ascii_char(file_path: str, encoding="utf8") -> str:
@@ -103,4 +101,4 @@ def get_most_common_non_ascii_char(file_path: str, encoding="utf8") -> str:
     return most_common_char
 
 
-get_most_common_non_ascii_char("data.txt", encoding="unicode-escape")
+#get_most_common_non_ascii_char("data.txt", encoding="unicode-escape")

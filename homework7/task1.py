@@ -26,44 +26,25 @@ example_tree = {
     "fourth": "RED",
 }
 
-occurrences = 0
 
 def find_occurrences(tree: dict, element: Any) -> int:
-    global occurrences
-
-    for value in tree.values():
-        if type(value) == (str or int or bool):
-            if element == value:
-                occurrences += 1
-        elif type(value) == dict:
-            print(type(value))
-            tree1 = value
-            find_occurrences(tree1, element)
-        else:
-            repeat = True
-            while repeat:
-                if (type(value) == list or tuple or set):    # and (type(value) != str):
-                    for val in value:
-                        if val == value[-1]: repeat = False
-                        if type(val) == dict:
-                            repeat = False
-                            find_occurrences(val, element)
-                        elif (type(val) == list) and (type(val) != str):
-                            find_occurrences(dict(enumerate(val)), element)
-                        elif element == val:
-                            occurrences += 1
-                            print(occurrences)
-
+    occurrences = 0
+    values = tree.values() if isinstance(tree, dict) else tree
+    for value in values:
+        if element == value:
+            occurrences += 1
+        elif type(value) in (dict, list, tuple, set):
+            occurrences += find_occurrences(value, element)
     return occurrences
 
 
 if __name__ == '__main__':
 
-    # print(find_occurrences(example_tree, "RED"))  # 6
+    print(find_occurrences(example_tree, "RED"))  # 6
 
     tree1 = {
          "first": ["RED", "BLUE"],
          "second": ("simple", ["RED", "valued"])}
 
-    # print(find_occurrences(tree1, "RED"))  #2
+# print(find_occurrences(tree1, "RED"))  #2
 

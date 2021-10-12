@@ -20,19 +20,22 @@ def merge_sorted_files(file_list: List[Union[Path, str]]) -> Iterator:
     list_of_files = []
     for file in file_list:
         list_of_files.append(open(file))
-    numbers = list(map(lambda x: (x.readline()), list_of_files))
-
+    numbers = list((map(lambda x: (x.readline()), list_of_files)))
+    int_numbers = [int(item) for item in numbers]
     while True:
-        min_number = min(numbers)
-        if min_number == '1000000':
+        min_number = min(int_numbers)
+        if min_number == 111111111:
             break
-        index_min_number = numbers.index(min_number)
-        numbers[index_min_number] = (list_of_files[index_min_number].readline())
-        if numbers[index_min_number] == '':
-            numbers[index_min_number] = '1000000'
+        index_min_number = int_numbers.index(min_number)
+        int_numbers[index_min_number] = list_of_files[index_min_number].readline()
+        if int_numbers[index_min_number] == '':
+            int_numbers[index_min_number] = 111111111
+            list_of_files[index_min_number].close()
+        else:
+            int_numbers[index_min_number] = int(int_numbers[index_min_number])
+
         yield min_number
 
 
-file_list1 = ['file1.txt', 'file2.txt']
-print(list(merge_sorted_files(file_list1)))
-
+# file_list1 = ['file1.txt', 'file2.txt', 'file3.txt']
+# print(list(merge_sorted_files(file_list1)))

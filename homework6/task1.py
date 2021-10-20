@@ -33,18 +33,16 @@ def instances_counter(cls):
     setattr(cls, 'reset_instances_counter', reset_instances_counter)
     return cls
 
-
-# @instances_counter
-# class User:
-#     pass
-
-
 if __name__ == '__main__':
 
-    print(User.get_created_instances())  # 0
-    user = User()
-    user1 = User()
-    user2 = User()
-    print(user.get_created_instances())  # 3
-    print(user.reset_instances_counter())  # 3
+    @instances_counter
+    class User:
+        pass
+
+    # print(User.get_created_instances())  # 0
+    # user = User()
+    # user1 = User()
+    # user2 = User()
+    # print(user.get_created_instances())  # 3
+    # print(user.reset_instances_counter())  # 3
 

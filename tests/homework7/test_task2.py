@@ -13,7 +13,13 @@ def test_backspace_compare_case2():
     assert(backspace_compare(s2, t2) == True)
 
 
+def test_backspace_compare_case3():
+    s3 = "aaaaa#####c"
+    t3 = "aa##c"
+    assert(backspace_compare(s3, t3) == True)
+
+
 def test_backspace_compare_different_length():
     s3 = "a#c"
     t3 = "b"
-    assert(backspace_compare(s3, t3) == True)
+    assert(backspace_compare(s3, t3) == False)

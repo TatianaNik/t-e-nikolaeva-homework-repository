@@ -18,24 +18,26 @@ Examples:
 def backspace_compare(first: str, second: str):
     f_list = list(first)
     s_list = list(second)
-    for f in f_list:
-        if f == '#':
+    while True:
+        try:
             f_index = f_list.index('#')
-            f_list[f_index] = '0'
+            f_list.remove(f_list[f_index])
             if f_index != 0:
-                f_list[f_index - 1] = '0'
+                f_list.remove(f_list[f_index-1])
+        except ValueError:
+            print("end of the first list")
+            break
 
-    for s in s_list:
-        if s == '#':
+    while True:
+        try:
             s_index = s_list.index('#')
-            s_list[s_index] = '0'
+            s_list.remove(s_list[s_index])
             if s_index != 0:
-                s_list[s_index - 1] = '0'
+                s_list.remove(s_list[s_index-1])
+        except ValueError:
+            print("end of the second list")
+            break
 
-    while '0' in f_list:
-        f_list.remove('0')
-    while '0' in s_list:
-        s_list.remove('0')
     print(f_list, s_list)
     for i in range(len(f_list)):
         if f_list[i] != s_list[i]:
@@ -53,3 +55,4 @@ def backspace_compare(first: str, second: str):
 # s3 = "a#c"
 # t3 = "b"
 # print(backspace_compare(t3, s3))
+print(backspace_compare('aaaaa#####c', 'aa##c'))

@@ -24,4 +24,3 @@ def tmp_file():
 
 def test_read_magic_number_true_case(tmp_file):
     assert read_magic_number(tmp_file.name)
-

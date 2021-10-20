@@ -22,7 +22,8 @@ You will learn:
 *** https://docs.python.org/3/tutorial/errors.html#handling-exceptions
 **** https://docs.python.org/3/tutorial/errors.html#raising-exceptions
 """
-#import os
+# import os
+
 
 def read_magic_number(path: str) -> bool:
     try:
@@ -37,7 +38,11 @@ def read_magic_number(path: str) -> bool:
     except:
         raise ValueError
 
-# if os.path.exists(path) == False:
-#     print(path, 'does not exist')
 
-# print(read_magic_number('file_with_number'))
+if __name__ == "__main__":
+
+    print(read_magic_number('file_with_number'))
+
+
+# if os.path.exists(path) == False:
+    # print(path, 'does not exist')

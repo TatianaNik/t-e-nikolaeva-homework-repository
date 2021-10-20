@@ -25,12 +25,7 @@ def my_precious_logger(text: str):
     else:
         sys.stdout.write(text)
 
-my_precious_logger("error: file not found")
-sys.stderr
-my_precious_logger("OK")
-sys.stdout
 
-
-
-
-
+if __name__ == "__main__":
+    my_precious_logger("error: file not found")
+    my_precious_logger("OK")

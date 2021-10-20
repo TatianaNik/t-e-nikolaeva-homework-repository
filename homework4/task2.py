@@ -34,4 +34,5 @@ def count_dots_on_i(url: str) -> int:
         return n
 
 
-count_dots_on_i('https://example.com/')
+if __name__ == "__main__":
+    count_dots_on_i('https://example.com/')

@@ -50,19 +50,21 @@ def get_company_list(p_url):  # processing one page out of 12
 
 with ThreadPoolExecutor(max_workers=12) as pool:
     companies = list(pool.map(get_company_list, pages_urls))
-    print(companies)
+    # print(companies)
 
-sorted_by_price = sorted(companies, key=lambda k: float(k['value']))
-ten_most_expensive = sorted_by_price[-10:-1]  # ten companies with most expensive stocks
-sorted_by_P_E_Ratio = sorted(companies, key=lambda k: k['P/E Ratio'])
-ten_lowest_P_E_Ratio = sorted_by_P_E_Ratio[0:10]  # ten companies with lowest P/E Ratio
-sorted_by_growth = sorted(companies, key=lambda k: k['1_year'])
-ten_biggest_growth = sorted_by_growth[-10:-1]    # ten companies with biggest 1 year growth
+#  Correction needed for the following lines:
+
+# sorted_by_price = sorted(companies, key=lambda k: float(k['value']))
+# ten_most_expensive = sorted_by_price[-10:-1]  # ten companies with most expensive stocks
+# sorted_by_P_E_Ratio = sorted(companies, key=lambda k: k['P/E Ratio'])
+# ten_lowest_P_E_Ratio = sorted_by_P_E_Ratio[0:10]  # ten companies with lowest P/E Ratio
+# sorted_by_growth = sorted(companies, key=lambda k: k['1_year'])
+# ten_biggest_growth = sorted_by_growth[-10:-1]    # ten companies with biggest 1 year growth
+
 sorted_by_pot_profit = sorted(companies, key=lambda k: k['potential_profit_%'])
 ten_biggest_pt_profit = sorted_by_pot_profit[-10:-1]   # ten companies with biggest potential profit
 
-# r = requests.get("http://www.cbr.ru/scripts/XML_daily.asp")    # current USD values
-# r_bs = BeautifulSoup(r.text, features="hml.parser")
+curr = requests.get('https://www.cbr-xml-daily.ru/daily_json.js') #  current usd values
+curr_usd = curr.json()['Valute']['USD']['Value']
 
-# usd_rate = r_bs.find('     ') ?????
-# print(usd_rate)
+

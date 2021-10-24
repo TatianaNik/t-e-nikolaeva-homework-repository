@@ -12,7 +12,9 @@ for page in range(1, 12):
     page_url = 'https://markets.businessinsider.com/index/components/s&p_500?p=' + str(page)
     pages_urls.append(page_url)
 
-def get_company_list(response):  # processing one page out of 12
+
+def get_company_list(p_url):  # processing one page out of 12
+    response = requests.get(p_url)
     html_insider = BeautifulSoup(response.text, features="html.parser")
     h = html_insider.body
     body = h.find("tbody", class_="table__tbody")
@@ -43,28 +45,24 @@ def get_company_list(response):  # processing one page out of 12
         if row.findAll('span', class_="colorGreen"):
             for cell in row.findAll('span', class_="colorGreen")[-1]:
                 company['1_year'] = cell.text
-        # print(company)
     return company
 
 
 with ThreadPoolExecutor(max_workers=12) as pool:
-    responses = pool.map(requests.get, pages_urls)
-    companies = list(pool.map(get_company_list, responses))
+    companies = list(pool.map(get_company_list, pages_urls))
+    print(companies)
 
-    # print(companies)
 sorted_by_price = sorted(companies, key=lambda k: float(k['value']))
-ten_most_expensive = sorted_by_price[-10:-1]     # ten companies with most expensive stocks
+ten_most_expensive = sorted_by_price[-10:-1]  # ten companies with most expensive stocks
 sorted_by_P_E_Ratio = sorted(companies, key=lambda k: k['P/E Ratio'])
 ten_lowest_P_E_Ratio = sorted_by_P_E_Ratio[0:10]  # ten companies with lowest P/E Ratio
 sorted_by_growth = sorted(companies, key=lambda k: k['1_year'])
 ten_biggest_growth = sorted_by_growth[-10:-1]    # ten companies with biggest 1 year growth
-sorted_by_pot_profit = sorted(companies, key = lambda k: k['potential_profit_%'])
+sorted_by_pot_profit = sorted(companies, key=lambda k: k['potential_profit_%'])
 ten_biggest_pt_profit = sorted_by_pot_profit[-10:-1]   # ten companies with biggest potential profit
 
+# r = requests.get("http://www.cbr.ru/scripts/XML_daily.asp")    # current USD values
+# r_bs = BeautifulSoup(r.text, features="hml.parser")
 
-
-
-
-
-
-
+# usd_rate = r_bs.find('     ') ?????
+# print(usd_rate)

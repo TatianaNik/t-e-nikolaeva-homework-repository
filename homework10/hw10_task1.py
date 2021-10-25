@@ -30,13 +30,13 @@ def get_company_list(p_url):  # processing one page out of 12
                 response = requests.get(full_link)
                 html_company = BeautifulSoup(response.text, features="html.parser")
                 v = html_company.find('span', class_="price-section__current-value").text
-                company['value'] = v
+                company['value'] = float(v.replace(',',''))
                 items = html_company.findAll('div', class_="snapshot__data-item")
                 for item in items:
                     f = item.find(class_='snapshot__header').text
                     if f == "P/E Ratio":
                         p_e_value = item.text.strip()[0:5]
-                        company[f] = p_e_value
+                        company[f] = float(p_e_value.replace(',',''))
                     if f == "52 Week Low":
                         low = float(item.text[:20].strip().replace(',', ''))
                     if f == "52 Week High":
@@ -44,7 +44,7 @@ def get_company_list(p_url):  # processing one page out of 12
                         company['potential_profit_%'] = round(((high - low) / low * 100), 2)
         if row.findAll('span', class_="colorGreen"):
             for cell in row.findAll('span', class_="colorGreen")[-1]:
-                company['1_year'] = cell.text
+                company['1_year'] = float(cell.text.replace('%',''))
     return company
 
 
@@ -52,19 +52,20 @@ with ThreadPoolExecutor(max_workers=12) as pool:
     companies = list(pool.map(get_company_list, pages_urls))
     # print(companies)
 
-#  Correction needed for the following lines:
 
-# sorted_by_price = sorted(companies, key=lambda k: float(k['value']))
-# ten_most_expensive = sorted_by_price[-10:-1]  # ten companies with most expensive stocks
-# sorted_by_P_E_Ratio = sorted(companies, key=lambda k: k['P/E Ratio'])
-# ten_lowest_P_E_Ratio = sorted_by_P_E_Ratio[0:10]  # ten companies with lowest P/E Ratio
-# sorted_by_growth = sorted(companies, key=lambda k: k['1_year'])
-# ten_biggest_growth = sorted_by_growth[-10:-1]    # ten companies with biggest 1 year growth
-
+sorted_by_price = sorted(companies, key=lambda k: k['value'])
+ten_most_expensive = sorted_by_price[-10:-1]  # ten companies with most expensive stocks???? is that right?
+sorted_by_P_E_Ratio = sorted(companies, key=lambda k: k['P/E Ratio'])
+ten_lowest_P_E_Ratio = sorted_by_P_E_Ratio[0:10]  # ten companies with lowest P/E Ratio
+sorted_by_growth = sorted(companies, key=lambda k: k['1_year'])
+ten_biggest_growth = sorted_by_growth[-10:-1]    # ten companies with biggest 1 year growth
 sorted_by_pot_profit = sorted(companies, key=lambda k: k['potential_profit_%'])
 ten_biggest_pt_profit = sorted_by_pot_profit[-10:-1]   # ten companies with biggest potential profit
 
 curr = requests.get('https://www.cbr-xml-daily.ru/daily_json.js') #  current usd values
 curr_usd = curr.json()['Valute']['USD']['Value']
 
+for one in ten_most_expensive:
+    one["value"] = one["value"] * curr_usd
 
+print(ten_most_expensive)

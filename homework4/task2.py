@@ -24,13 +24,16 @@ import urllib.request
 
 
 def count_dots_on_i(url: str) -> int:
-    with urllib.request.urlopen(url) as f:
-        n = 0
-        s = f.read().decode('utf-8')
-        for symbol in s:
-            if symbol == "i":
-                n += 1
-        print(n)
+    try:
+        with urllib.request.urlopen(url) as f:
+            n = 0
+            s = f.read().decode('utf-8')
+            for symbol in s:
+                if symbol == "i":
+                    n += 1
+            print(n)
+    except посмотреть в документации
+
         return n
 
 

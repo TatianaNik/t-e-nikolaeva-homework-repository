@@ -73,12 +73,10 @@ class HomeworkResult:
         self.author = author
         self.solution = solution
 
-        try:
-            isinstance(homework, Homework)
+        if isinstance(homework, Homework):
             self.homework = homework
-
-        except AttributeError:
-            print('You gave not a Homework object')
+        else:
+            raise AttributeError('You gave not a Homework object')
 
 
 class Teacher(Person):

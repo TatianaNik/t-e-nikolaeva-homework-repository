@@ -13,20 +13,17 @@ class TableData:
         row = list(cursor.fetchone())
         return row
 
-
     def __len__(self):
         cursor = self.conn.cursor()
         cursor.execute(f'SELECT COUNT(*) from {self.table_name}')
         n = cursor.fetchone()
         return n[0]
 
-
     def __contains__(self, name):
         if self.__getitem__(name):
             return True
         else:
             return False
-
 
     def __iter__(self):
         cursor = self.conn.cursor()
@@ -49,10 +46,11 @@ class ClassIterator:
             return row
 
 
+if __name__ == '__main__':
 
-presidents = TableData(database_name='example.sqlite', table_name='presidents')
-print(presidents['Yeltsin'])
-print(len(presidents))
-print('Yeltsin' in presidents)
-for president in presidents:
-    print(president)
+    presidents = TableData(database_name='example.sqlite', table_name='presidents')
+    print(presidents['Yeltsin'])
+    print(len(presidents))
+    print('Yeltsin' in presidents)
+    for president in presidents:
+        print(president)

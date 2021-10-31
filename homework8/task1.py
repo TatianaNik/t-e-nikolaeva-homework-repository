@@ -38,8 +38,9 @@ class KeyValueStorage:
         return self.__dict__[key]
 
 
+if __name__ == '__main__':
 
-storage = KeyValueStorage('hw8_task1_data.txt')
-print(storage['name'])
-print(storage.name)
-#print(storage.power)
+    storage = KeyValueStorage('hw8_task1_data.txt')
+    print(storage['name'])
+    print(storage.name)
+    # print(storage.power)

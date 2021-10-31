@@ -42,7 +42,7 @@ def test_file_not_found_case(capsys):
 
 
 # str1 = "wrong_str"
-#
+
 # def test_read_magic_number_value_error(tmp_file):
 #     with pytest.raises(ValueError):
 #          read_magic_number(tmp_file.name)

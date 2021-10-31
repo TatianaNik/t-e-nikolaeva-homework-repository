@@ -20,6 +20,7 @@ You will learn:
 * https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen
 """
 
+
 import urllib.request, urllib.error
 
 
@@ -38,5 +39,6 @@ def count_dots_on_i(url: str) -> int:
 
 
 if __name__ == "__main__":
+
     count_dots_on_i('https://example.com/')
     count_dots_on_i('https://fghjhgjkhjl.com')

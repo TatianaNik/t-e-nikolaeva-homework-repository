@@ -1,4 +1,4 @@
-import pytest_mock, pytest, urllib.request
+import pytest, urllib.request
 
 from homework4.task2 import count_dots_on_i
 
@@ -10,4 +10,4 @@ def test_count_dots_on_i_mock(mocker):
 
 def test_count_dots_on_i_value_error():
     with pytest.raises(ValueError):
-         count_dots_on_i('https://hkjllkh.com')
+        count_dots_on_i('https://hkjllkh.com')

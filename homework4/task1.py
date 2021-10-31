@@ -44,5 +44,6 @@ if __name__ == "__main__":
     # print(read_magic_number('file_with_number'))
 
     print(read_magic_number("f_file"))
+
 # if os.path.exists(path) == False:
     # print(path, 'does not exist')

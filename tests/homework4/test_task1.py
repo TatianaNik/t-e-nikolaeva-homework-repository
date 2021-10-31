@@ -10,7 +10,7 @@ def write_to_file(file_name, str_of_numbers):
     return file_name
 
 
-str1 = "2\n, 3, 4, 5"
+# str1 = "2\n, 3, 4, 5"
 
 
 @pytest.fixture
@@ -22,7 +22,27 @@ def tmp_file():
     os.remove('tmp_file')
 
 
-def test_read_magic_number_true_case(tmp_file):
-    assert read_magic_number(tmp_file.name)
+# def test_read_magic_number_true_case(tmp_file):
+#     assert read_magic_number(tmp_file.name)
 
-добавить тесты
+
+str1 = "0\n, 8, 9, 0"
+
+
+# def test_read_magic_number_false_case(tmp_file):
+#     assert not read_magic_number(tmp_file.name)
+
+
+
+def test_file_not_found_case(capsys):
+    read_magic_number('t_file')
+    captured = capsys.readouterr()
+    assert captured.out == "file not found\n"
+
+
+
+# str1 = "wrong_str"
+#
+# def test_read_magic_number_value_error(tmp_file):
+#     with pytest.raises(ValueError):
+#          read_magic_number(tmp_file.name)

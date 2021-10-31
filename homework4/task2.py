@@ -20,22 +20,23 @@ You will learn:
 * https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen
 """
 
-import urllib.request
+import urllib.request, urllib.error
 
 
 def count_dots_on_i(url: str) -> int:
     try:
-        with urllib.request.urlopen(url) as f:
-            n = 0
-            s = f.read().decode('utf-8')
-            for symbol in s:
-                if symbol == "i":
-                    n += 1
-            print(n)
-    except посмотреть в документации
-
+        f = urllib.request.urlopen(url)
+        n = 0
+        s = f.read().decode('utf-8')
+        for symbol in s:
+            if symbol == "i":
+                n += 1
+        print(n)
         return n
+    except urllib.error.URLError:
+        raise ValueError(f"Unreachable {url}")
 
 
 if __name__ == "__main__":
     count_dots_on_i('https://example.com/')
+    count_dots_on_i('https://fghjhgjkhjl.com')

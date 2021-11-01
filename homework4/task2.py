@@ -21,7 +21,8 @@ You will learn:
 """
 
 
-import urllib.request, urllib.error
+import urllib.request
+import urllib.error
 
 
 def count_dots_on_i(url: str) -> int:
